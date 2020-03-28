@@ -16,32 +16,35 @@
 
     <properties>
         <java.version>1.8</java.version>    
-        <org.apache.myfaces.version>2.3.4</org.apache.myfaces.version>
+        <org.apache.myfaces.version>2.3.6</org.apache.myfaces.version>
+        <org.primefaces.version>8.0</org.primefaces.version>
+        <joinfaces.version>4.1.5</joinfaces.version>
     </properties>
 
-    <dependencies>
-        
-        <dependency>
-            <groupId>org.apache.myfaces.core</groupId>
-            <artifactId>myfaces-impl</artifactId>
-            <version>${org.apache.myfaces.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.myfaces.core</groupId>
-            <artifactId>myfaces-api</artifactId>
-            <version>${org.apache.myfaces.version}</version>
-        </dependency>
+    <!-- Manejar dependencias por parte de JoinFaces -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.joinfaces</groupId>
+                <artifactId>joinfaces-dependencies</artifactId>
+                <version>${joinfaces.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
+    <dependencies>
+        <!-- La dependencia que hace que JoinFaces funcione!! -->
         <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>7.0</version>
+            <groupId>org.joinfaces</groupId>
+            <artifactId>jsf-spring-boot-starter</artifactId>
         </dependency>
+        <!--Dependencias de spring boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -52,6 +55,12 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <!-- Agregamos esta dependencia para tener la version mas actual de Primefaces -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${org.primefaces.version}</version>
         </dependency>
     </dependencies>
 
